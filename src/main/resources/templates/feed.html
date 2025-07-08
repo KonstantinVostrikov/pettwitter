@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitter</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<h3 th:class="feed-header">Your Feed</h3>
+
+
+
+
+<div th:class="feed">
+
+    <form th:class="post-container" action="#" th:action="@{/create-post}" th:object="${post}" method="post">
+        <!--    <p>Message: <input type="text" th:field="*{content}" /></p>-->
+        <!--     todo:  подставлять настоящий id юзера поста -->
+        <p th:class="new-post">
+            <textarea placeholder="What's want to share?" maxlength="144" rows="4" cols="85" th:field="*{content}"></textarea>
+        </p>
+        <p th:class="new-post">
+            <input type="submit" value="Post"/>
+            <input type="reset" value="Clear"/>
+        </p>
+    </form>
+
+
+
+    <div th:class="post-container" th:each="item: ${posts}">
+        <div th:class="post-header">
+          <img
+                  src="https://cdn.freecodecamp.org/curriculum/legacy-css-flexbox/quincy-twitter-photo.jpg"
+                  alt="Quincy Larson's profile picture"
+                  class="profile-thumbnail"
+          />
+          <div class="profile-name">
+            <h3 th:class="zero-margin" th:text="${item.author}">Quincy Larson</h3>
+            <h4 th:class="zero-margin" th:text="${#strings.prepend(item.author,'@')}">@ossia</h4>
+          </div>
+          <div th:class="follow-btn">
+            <button th:class="follow-btn-button">Follow</button>
+          </div>
+        </div>
+
+        <div>
+          <p th:text="${item.content}">
+            I meet so many people who are in search of that one trick that will help
+            them work smart. Even if you work smart, you still have to work hard.
+          </p>
+<!--           <span >1:32 PM - 12 Jan 2018</span> -->
+          <span th:text="${#temporals.format(item.updatedAt, 'HH:mm - dd/MM/yyyy')}">1:32 PM - 12 Jan 2018</span>
+          <hr/>
+        </div>
+
+        <div th:class="post-footer">
+          <div th:class="post-footer-stats">
+            <div><strong>107</strong> Retweets</div>
+            <div th:class="post-footer-stats-likes"><strong th:text="${item.likesCounter}">431</strong> Likes</div>
+          </div>
+          <div class="post-footer-cta">
+            <button>Share</button>
+            <button>Retweet</button>
+            <button>Like</button>
+          </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+}
+textarea {
+    resize: none;
+}
+
+
+.feed-header {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    text-align: center;
+}
+
+.feed {
+    margin-left: auto;
+    margin-right: auto;
+    border: solid grey;
+    width: 40%;
+}
+
+.new-post {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.post {
+    border: groove gold;
+}
+
+.post-container {
+    border-bottom-color: gray;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+
+    padding: 15px 15px 15px 15px;
+
+    margin: auto;
+}
+
+.post-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+}
+
+.profile-name {
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 0;
+    margin-left: 10px;
+}
+
+.zero-margin {
+    margin: 0;
+}
+
+.follow-btn {
+    display: flex;
+    margin: 0 0 0 auto;
+}
+
+.follow-btn-button {
+    border: 0;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+
+
+.post-footer{
+    display: flex;
+}
+
+.post-footer-stats{
+    display: flex;
+}
+
+.post-footer-stats-likes{
+    margin-left: 10px;
+}
+
+.post-footer-cta {
+    margin: 0 0 0 auto;
+}
