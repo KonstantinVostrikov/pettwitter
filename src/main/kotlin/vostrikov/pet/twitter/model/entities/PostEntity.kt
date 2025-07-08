@@ -37,7 +37,8 @@ class PostEntity(
 fun PostEntity.toDto() = PostDto(
     id = this.id,
     content = this.content,
-    author = this.author.name,
+    authorNickname = this.author.username,
+    authorFullName = this.author.name,
     updatedAt = this.updatedAt,
     likesCounter = this.likesCounter?.size ?: 0
 )

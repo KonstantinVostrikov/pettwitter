@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS user_accounts
     name     VARCHAR(40) NOT NULL
 );
 INSERT INTO user_accounts
-VALUES ('8e238d63-ac33-4763-9cbf-86370fb7a8e2', 'alice', 'alice'),
+VALUES ('8e238d63-ac33-4763-9cbf-86370fb7a8e2', 'alice', 'aliceName'),
        ('2b32c85b-adee-4bbd-b9f8-3f09c4348087', 'bob','bob'),
        ('1f9b3a67-4cce-411a-8e8d-9f6c1f7e3f17', 'charlie', 'charlie'),
        ('3c4377df-d5e5-456f-9444-32e5d1524ac9','diana', 'diana'),

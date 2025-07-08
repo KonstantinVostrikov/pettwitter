@@ -29,7 +29,7 @@ class PostController(
     @PostMapping("/create-post")
     fun createPost(@ModelAttribute post: PostDto, @AuthenticationPrincipal  userDetails: UserDetails): String {
         val userDto = userAccountsService.findUserAccountByUsername(userDetails.username)
-        post.author = userDto.id
+        post.authorNickname = userDto.id
         postService.createPost(post)
 
         // todo обработка ошибок если пост не создался

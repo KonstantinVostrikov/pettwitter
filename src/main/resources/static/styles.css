@@ -1,10 +1,21 @@
 body {
     font-family: Arial, sans-serif;
+    margin: 0 0 0 0;
 }
+
+header {
+    background-color: lightblue;
+    padding: 20px;
+}
+
 textarea {
     resize: none;
 }
 
+.head-buttons {
+    display: flex;
+    flex-direction: row;
+}
 
 .feed-header {
     margin-left: auto;
@@ -75,16 +86,15 @@ textarea {
 }
 
 
-
-.post-footer{
+.post-footer {
     display: flex;
 }
 
-.post-footer-stats{
+.post-footer-stats {
     display: flex;
 }
 
-.post-footer-stats-likes{
+.post-footer-stats-likes {
     margin-left: 10px;
 }
 
