@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitter</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header>
+   <div th:class="head-buttons">
+     <form th:class="follow-btn" th:action="@{/logout}">
+        <button th:class="follow-btn-button">Log Out</button>
+    </form>
+   </div>
+
+</header>
+
+</body>
+</html>

@@ -37,8 +37,6 @@ class PostController(
         val userDto = userAccountsService.findUserAccountByUsername(userDetails.username)
         post.authorNickname = userDto.id
         postService.createPost(post)
-
-        // todo обработка ошибок если пост не создался
         return "redirect:/feed"
     }
 

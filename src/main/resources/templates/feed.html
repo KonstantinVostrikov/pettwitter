@@ -7,24 +7,13 @@
 </head>
 <body>
 
-<header>
-   <div th:class="head-buttons">
-     <form th:class="follow-btn" th:action="@{/logout}">
-        <button th:class="follow-btn-button">Log Out</button>
-    </form>
-   </div>
+    <div th:replace="~{header}"> </div>
 
-</header>
-
-<h3 th:class="feed-header">Your Feed</h3>
-
-
-
+    <h3 th:class="feed-header">Your Feed</h3>
 
 <div th:class="feed">
 
     <form th:class="post-container" action="#" th:action="@{/create-post}" th:object="${post}" method="post">
-        <!--    <p>Message: <input type="text" th:field="*{content}" /></p>-->
         <p th:class="new-post">
             <textarea placeholder="What's want to share?" maxlength="144" rows="4" cols="85" th:field="*{content}"></textarea>
         </p>
@@ -57,7 +46,6 @@
             I meet so many people who are in search of that one trick that will help
             them work smart. Even if you work smart, you still have to work hard.
           </p>
-            <!--           <span >1:32 PM - 12 Jan 2018</span> -->
           <span th:text="${#temporals.format(item.updatedAt, 'HH:mm - dd/MM/yyyy')}">1:32 PM - 12 Jan 2018</span>
           <hr/>
         </div>
