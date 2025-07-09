@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitter</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+
+
+<!-- header -->
+<div th:replace="~{header :: header}">...</div>
+<!-- //header -->
+
+
+<!-- <div> -->
+<!--     <form class="login-form" method="post" action="/login"> -->
+<!--         <h2>Please sign in</h2> -->
+<!--         <p> -->
+<!--           <label for="username" class="screenreader">Username</label> -->
+<!--           <input type="text" id="username" name="{{usernameParameter}}" placeholder="Username" required autofocus> -->
+<!--         </p> -->
+<!--         <p> -->
+<!--           <label for="password" class="screenreader">Password</label> -->
+<!--           <input type="password" id="password" name="{{passwordParameter}}" placeholder="Password" {{autocomplete}}required> -->
+<!--         </p> -->
+<!--         <button type="submit" class="primary">Sign in</button> -->
+<!--      </form> -->
+<!-- </div> -->
+
+<section id="contact">
+    <div>
+        <div>
+            <h3>LogIn</h3>
+        </div>
+        <div>
+            <div>
+                <form action="/login" method="post">
+                    <div>
+                        <li role="alert" th:if="${!#strings.isEmpty(errorMessge)}" th:text="${errorMessge}"/>
+                        <input type="text" name="username" id="username" placeholder="Username" required autofocus/>
+                        <input type="password" name="password" id="password" placeholder="Password" required/>
+                    </div>
+                    <div>
+                        <button>Log In</button>
+                        <a class="new-user text-right" href="">New User ?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
