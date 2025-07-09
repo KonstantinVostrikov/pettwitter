@@ -13,6 +13,9 @@ textarea {
     width: 100%;
 }
 
+p {
+    word-wrap: break-word;
+}
 .head-buttons {
     display: flex;
     flex-direction: row;
