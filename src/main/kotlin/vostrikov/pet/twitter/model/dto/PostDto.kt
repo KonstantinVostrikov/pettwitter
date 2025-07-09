@@ -17,7 +17,6 @@ data class PostDto(
 fun PostDto.toPostEntity() = PostEntity(
     id = id.ifBlank { UUID.randomUUID().toString() },
     content = content,
-    // todo: real user name
     author = UserEntity(id = authorNickname!!)
 )
 
