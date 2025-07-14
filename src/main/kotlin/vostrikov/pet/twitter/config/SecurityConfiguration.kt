@@ -6,11 +6,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.provisioning.JdbcUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.AuthenticationFailureHandler
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler
 import javax.sql.DataSource
 
 
 @Configuration
-class SecurityConfiguration {
+class SecurityConfiguration(
+    private val authenticationSuccessHandler: AuthenticationSuccessHandler,
+    private val authenticationFailureHandler: AuthenticationFailureHandler
+) {
 
     @Bean
     fun defaultSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
@@ -24,8 +29,8 @@ class SecurityConfiguration {
             .formLogin { formLoginConfig ->
                 formLoginConfig
                     .loginPage("/login")
-                    .defaultSuccessUrl("/feed")
-                    .failureUrl("/login?error=true")
+                    .successHandler(authenticationSuccessHandler)
+                    .failureHandler(authenticationFailureHandler)
             }
 
         return http.build()
