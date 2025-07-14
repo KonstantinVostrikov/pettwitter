@@ -23,8 +23,8 @@ class SecurityConfiguration(
             .csrf { it.disable() }
             .authorizeHttpRequests { requests ->
                 requests
-                    .requestMatchers("/", "/feed", "/create-post" ).authenticated()
                     .requestMatchers("/assets/**", "/login/**").permitAll()
+                    .anyRequest().authenticated()
             }
             .formLogin { formLoginConfig ->
                 formLoginConfig
