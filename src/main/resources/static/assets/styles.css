@@ -1,3 +1,5 @@
+/* || GENERAL STYLES */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0 0 0 0;
@@ -16,10 +18,23 @@ textarea {
 p {
     word-wrap: break-word;
 }
-.head-buttons {
-    display: flex;
-    flex-direction: row;
+
+button:hover {
+    cursor: pointer;
 }
+
+/* || UTILITIES */
+.right-side-btn {
+    display: flex;
+    margin: 0 0 0 auto;
+}
+
+.right-side-button {
+    border: 0;
+    border-radius: 3px;
+    padding: 5px;
+}
+
 
 .feed-header {
     margin-left: auto;
@@ -27,6 +42,15 @@ p {
     width: 40%;
     text-align: center;
 }
+
+/* || HEADER */
+
+.head-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+/* || FEED PAGE*/
 
 .feed {
     margin-left: auto;
@@ -78,18 +102,6 @@ p {
     margin: 0;
 }
 
-.follow-btn {
-    display: flex;
-    margin: 0 0 0 auto;
-}
-
-.follow-btn-button {
-    border: 0;
-    border-radius: 3px;
-    padding: 5px;
-}
-
-
 .post-footer {
     display: flex;
 }
@@ -106,8 +118,11 @@ p {
     margin: 0 0 0 auto;
 }
 
+/* || ERROR PAGE*/
 
 .error {
     margin: auto;
     text-align: center;
 }
+
+/* || LOGIN PAGE*/
