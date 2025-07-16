@@ -30,7 +30,7 @@ class PostEntity(
         joinColumns = [JoinColumn(name = "post_id")],
         inverseJoinColumns = [JoinColumn(name = "user_id")]
     )
-    var likesCounter: Set<UserEntity>? = null,
+    var likesCounter: MutableSet<UserEntity> = HashSet(),
 )
 
 
@@ -40,5 +40,5 @@ fun PostEntity.toDto() = PostDto(
     authorNickname = this.author.username,
     authorFullName = this.author.name,
     updatedAt = this.updatedAt,
-    likesCounter = this.likesCounter?.size ?: 0
+    likesCounter = this.likesCounter.size
 )

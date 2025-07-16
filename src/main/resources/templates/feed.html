@@ -56,9 +56,15 @@
             <div th:class="post-footer-stats-likes"><strong th:text="${item.likesCounter}">431</strong> Likes</div>
           </div>
           <div class="post-footer-cta">
-            <button>Share</button>
-            <button>Retweet</button>
-            <button>Like</button>
+              <form action="#" th:action="@{/post/like/{id}(id = ${item.id})}" method="get">
+                    <button>Share</button>
+              </form>
+              <form action="#" th:action="@{/post/like/{id}(id = ${item.id})}" method="get">
+                    <button>Retweet</button>
+              </form>
+              <form action="#" th:action="@{/post/like/{id}(id = ${item.id})}" method="get">
+                    <button>Like</button>
+              </form>
           </div>
         </div>
     </div>

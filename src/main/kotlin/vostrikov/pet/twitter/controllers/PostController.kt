@@ -4,10 +4,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 import vostrikov.pet.twitter.model.dto.PostDto
 import vostrikov.pet.twitter.services.PostService
 import vostrikov.pet.twitter.services.UserAccountsService
@@ -37,6 +34,12 @@ class PostController(
         val userDto = userAccountsService.findUserAccountByUsername(userDetails.username)
         post.authorNickname = userDto.id
         postService.createPost(post)
+        return "redirect:/feed"
+    }
+
+    @GetMapping("/post/like/{id}")
+    fun likePost(@PathVariable id: String, @AuthenticationPrincipal  userDetails: UserDetails): String {
+        postService.like(id, userDetails.username)
         return "redirect:/feed"
     }
 

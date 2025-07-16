@@ -116,6 +116,7 @@ button:hover {
 
 .post-footer-cta {
     margin: 0 0 0 auto;
+    display: flex;
 }
 
 /* || ERROR PAGE*/
