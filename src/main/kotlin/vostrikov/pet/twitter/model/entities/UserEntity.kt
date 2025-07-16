@@ -4,6 +4,7 @@ import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import vostrikov.pet.twitter.model.dto.UserDto
 
 @Entity
 @Table(name = "user_accounts")
@@ -21,3 +22,5 @@ class UserEntity(
 //    @ManyToMany(targetEntity = PostEntity::class)
 //    var  likes : Set<PostEntity>
 )
+
+fun UserEntity.toUserDto() = UserDto(id = id, username = username, name = name)

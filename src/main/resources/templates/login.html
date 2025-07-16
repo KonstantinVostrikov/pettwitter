@@ -29,21 +29,26 @@
 <!-- </div> -->
 
 <section id="contact">
-    <div>
+    <div class="signup-container">
         <div>
-            <h3>LogIn</h3>
+            <h2>Login</h2>
         </div>
         <div>
             <div>
-                <form action="/login" method="post">
-                    <div>
+                <form action="/login/login" method="post">
+                    <div class="form-group">
                         <li role="alert" th:if="${!#strings.isEmpty(errorMessge)}" th:text="${errorMessge}"/>
+                        <label for="username">Username</label>
                         <input type="text" name="username" id="username" placeholder="Username" required autofocus/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
                         <input type="password" name="password" id="password" placeholder="Password" required/>
                     </div>
                     <div>
-                        <button>Log In</button>
-                        <a href="">New User ?</a>
+                        <button th:class="signup-button">Log In</button>
+                        <a href="/users/signup">New User ?</a>
                     </div>
                 </form>
             </div>

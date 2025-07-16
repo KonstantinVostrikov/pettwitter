@@ -1,5 +1,6 @@
 package vostrikov.pet.twitter.controllers
 
+import org.springframework.security.core.Authentication
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Controller
@@ -30,16 +31,17 @@ class PostController(
     }
 
     @PostMapping("/create-post")
-    fun createPost(@ModelAttribute post: PostDto, @AuthenticationPrincipal  userDetails: UserDetails): String {
-        val userDto = userAccountsService.findUserAccountByUsername(userDetails.username)
+//    fun createPost(@ModelAttribute post: PostDto, @AuthenticationPrincipal  userDetails: UserDetails): String {
+    fun createPost(@ModelAttribute post: PostDto, authentication: Authentication): String {
+        val userDto = userAccountsService.findUserAccountByUsername(authentication.name)
         post.authorNickname = userDto.id
         postService.createPost(post)
         return "redirect:/feed"
     }
 
     @GetMapping("/post/like/{id}")
-    fun likePost(@PathVariable id: String, @AuthenticationPrincipal  userDetails: UserDetails): String {
-        postService.like(id, userDetails.username)
+    fun likePost(@PathVariable id: String, authentication: Authentication): String {
+        postService.like(id, authentication.name)
         return "redirect:/feed"
     }
 

@@ -1,3 +1,4 @@
+DROP TABLE users CASCADE;
 CREATE TABLE IF NOT EXISTS users
 (
     username varchar(50)  NOT NULL PRIMARY KEY,
@@ -5,6 +6,7 @@ CREATE TABLE IF NOT EXISTS users
     enabled  boolean      NOT NULL
 );
 
+DROP TABLE authorities;
 CREATE TABLE IF NOT EXISTS authorities
 (
     username  varchar(50) NOT NULL,
@@ -12,6 +14,30 @@ CREATE TABLE IF NOT EXISTS authorities
     CONSTRAINT fk_authorities_users FOREIGN KEY (username) REFERENCES users (username)
 );
 CREATE UNIQUE INDEX IF NOT EXISTS ix_auth_username ON authorities (username, authority);
+
+INSERT INTO users
+VALUES ('alice', '{bcrypt}$2a$12$XGKukcLHrKRKzUguTLuXpOlyq.IjyrVzmI7Qw8TbYO6XRMAqsLuFq', TRUE),
+       ('bob', '{bcrypt}$2a$12$XGKukcLHrKRKzUguTLuXpOlyq.IjyrVzmI7Qw8TbYO6XRMAqsLuFq', TRUE),
+       ('charlie', '{bcrypt}$2a$12$XGKukcLHrKRKzUguTLuXpOlyq.IjyrVzmI7Qw8TbYO6XRMAqsLuFq', TRUE),
+       ('diana', '{bcrypt}$2a$12$XGKukcLHrKRKzUguTLuXpOlyq.IjyrVzmI7Qw8TbYO6XRMAqsLuFq', TRUE),
+       ('ethan', '{bcrypt}$2a$12$XGKukcLHrKRKzUguTLuXpOlyq.IjyrVzmI7Qw8TbYO6XRMAqsLuFq', TRUE),
+       ('fiona', '{bcrypt}$2a$12$XGKukcLHrKRKzUguTLuXpOlyq.IjyrVzmI7Qw8TbYO6XRMAqsLuFq', TRUE),
+       ('george', '{bcrypt}$2a$12$XGKukcLHrKRKzUguTLuXpOlyq.IjyrVzmI7Qw8TbYO6XRMAqsLuFq', TRUE),
+       ('hannah', '{bcrypt}$2a$12$XGKukcLHrKRKzUguTLuXpOlyq.IjyrVzmI7Qw8TbYO6XRMAqsLuFq', TRUE),
+       ('ian', '{bcrypt}$2a$12$XGKukcLHrKRKzUguTLuXpOlyq.IjyrVzmI7Qw8TbYO6XRMAqsLuFq', TRUE),
+       ('julia', '{bcrypt}$2a$12$XGKukcLHrKRKzUguTLuXpOlyq.IjyrVzmI7Qw8TbYO6XRMAqsLuFq', TRUE);
+
+INSERT INTO authorities
+VALUES ('alice', 'read'),
+       ('bob', 'read'),
+       ('charlie', 'read'),
+       ('diana', 'read'),
+       ('ethan', 'read'),
+       ('fiona', 'read'),
+       ('george', 'read'),
+       ('hannah', 'read'),
+       ('ian', 'read'),
+       ('julia', 'read');
 
 -- USER ACCOUNTS
 DROP TABLE IF EXISTS user_accounts CASCADE;
