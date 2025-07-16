@@ -41,8 +41,5 @@ class PostController(
     }
 
 
-    @GetMapping("/an")
-    fun index(): String {
-        return "index"
-    }
+
 }
