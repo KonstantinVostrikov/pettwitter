@@ -13,6 +13,6 @@ class CustomAuthenticationFailureHandler : AuthenticationFailureHandler {
 
     override fun onAuthenticationFailure(request: HttpServletRequest?, response: HttpServletResponse?, exception: AuthenticationException?) {
         log.error { "Login failed for username=${exception!!.authenticationRequest.principal}  due to : ${exception.message}" }
-        response!!.sendRedirect("/login?error=true")
+        response!!.sendRedirect("/login/login?error=true")
     }
 }
