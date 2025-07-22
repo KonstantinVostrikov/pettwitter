@@ -27,6 +27,7 @@ class SecurityConfiguration(
                     .requestMatchers(
                         "/assets/**",
                         "/login/**",
+                        "/error",
                         "/users/signup",
                         "/users/create-user"
                     ).permitAll()
