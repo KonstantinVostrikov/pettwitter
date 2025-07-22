@@ -45,9 +45,9 @@ button:hover {
 
 /* || HEADER */
 
-.head-buttons {
+nav {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
 }
 
 /* || FEED PAGE*/

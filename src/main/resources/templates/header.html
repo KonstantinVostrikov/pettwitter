@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Twitter</title>
@@ -8,11 +8,11 @@
 <body>
 
 <header>
-   <div th:class="head-buttons">
-     <form th:class="right-side-btn" th:action="@{/logout}">
-        <button th:class="right-side-button">Log Out</button>
-    </form>
-   </div>
+    <nav>
+        <div sec:authorize="isAuthenticated()">
+            <a  th:href="@{/logout}">Log Out</a>
+        </div>
+    </nav>
 
 </header>
 
