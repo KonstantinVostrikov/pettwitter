@@ -7,15 +7,16 @@
 </head>
 <body>
 
-    <div th:replace="~{header}"> </div>
+<div th:replace="~{header}"></div>
 
-    <h3 th:class="feed-header">Your Feed</h3>
+<h3 th:class="feed-header">Your Feed</h3>
 
 <div th:class="feed">
 
     <form th:class="post-container" action="#" th:action="@{/create-post}" th:object="${post}" method="post">
         <p th:class="new-post">
-            <textarea placeholder="What's want to share?" maxlength="144" rows="4" cols="85" th:field="*{content}"></textarea>
+            <textarea placeholder="What's want to share?" maxlength="144" rows="4" cols="85"
+                      th:field="*{content}"></textarea>
         </p>
         <p th:class="new-post">
             <input type="submit" value="Post"/>
@@ -24,53 +25,51 @@
     </form>
 
 
-
     <div th:class="post-container" th:each="item: ${posts}">
         <div th:class="post-header">
-          <img
-                  src="https://cdn.freecodecamp.org/curriculum/legacy-css-flexbox/quincy-twitter-photo.jpg"
-                  alt="Quincy Larson's profile picture"
-                  class="profile-thumbnail"
-          />
-          <div class="profile-name">
-            <h3 th:class="zero-margin" th:text="${item.authorFullName}">Quincy Larson</h3>
-            <h4 th:class="zero-margin" th:text="${#strings.prepend(item.authorNickname,'@')}">@ossia</h4>
-          </div>
-          <div th:class="right-side-btn">
-            <button th:class="right-side-button">Follow</button>
-          </div>
+            <img
+                    src="https://cdn.freecodecamp.org/curriculum/legacy-css-flexbox/quincy-twitter-photo.jpg"
+                    alt="Quincy Larson's profile picture"
+                    class="profile-thumbnail"
+            />
+            <div class="profile-name">
+                <h3 th:class="zero-margin" th:text="${item.authorFullName}">Quincy Larson</h3>
+                <h4 th:class="zero-margin" th:text="${#strings.prepend(item.authorNickname,'@')}">@ossia</h4>
+            </div>
+            <div th:class="right-side-btn">
+                <button th:class="right-side-button">Follow</button>
+            </div>
         </div>
 
         <div>
-          <p th:text="${item.content}">
-            I meet so many people who are in search of that one trick that will help
-            them work smart. Even if you work smart, you still have to work hard.
-          </p>
-          <span th:text="${#temporals.format(item.updatedAt, 'HH:mm - dd/MM/yyyy')}">1:32 PM - 12 Jan 2018</span>
-          <hr/>
+            <p th:text="${item.content}">
+                I meet so many people who are in search of that one trick that will help
+                them work smart. Even if you work smart, you still have to work hard.
+            </p>
+            <span th:text="${#temporals.format(item.updatedAt, 'HH:mm - dd/MM/yyyy')}">1:32 PM - 12 Jan 2018</span>
+            <hr/>
         </div>
 
         <div th:class="post-footer">
-          <div th:class="post-footer-stats">
-            <div><strong>107</strong> Retweets</div>
-            <div th:class="post-footer-stats-likes"><strong th:text="${item.likesCounter}">431</strong> Likes</div>
-          </div>
-          <div class="post-footer-cta">
-              <form action="#" th:action="@{/post/like/{id}(id = ${item.id})}" method="get">
+            <div th:class="post-footer-stats">
+                <div><strong>107</strong> Retweets</div>
+                <div th:class="post-footer-stats-likes"><strong th:text="${item.likesCounter}">431</strong> Likes</div>
+            </div>
+            <div class="post-footer-cta">
+                <form action="#" th:action="@{/post/like/{id}(id = ${item.id})}" method="get">
                     <button>Share</button>
-              </form>
-              <form action="#" th:action="@{/post/like/{id}(id = ${item.id})}" method="get">
+                </form>
+                <form action="#" th:action="@{/post/like/{id}(id = ${item.id})}" method="get">
                     <button>Retweet</button>
-              </form>
-              <form action="#" th:action="@{/post/like/{id}(id = ${item.id})}" method="get">
+                </form>
+                <form action="#" th:action="@{/post/like/{id}(id = ${item.id})}" method="get">
                     <button>Like</button>
-              </form>
-          </div>
+                </form>
+            </div>
         </div>
     </div>
 
 </div>
-
 
 
 </body>

@@ -6,15 +6,15 @@
     <link rel="stylesheet" href="/assets/styles.css">
 </head>
 <body>
-    <div th:replace="~{header}"> </div>
+<div th:replace="~{header}"></div>
 
-    <div th:class="error">
-        <form action="#" th:action="@{/feed}" method="get">
-             <h3 th:class="feed-header">Sorry an error occurred please return to the main page</h3>
-            <p>
-                <input type="submit" value="Return to feed"/>
-            </p>
-        </form>
-    </div>
+<div th:class="error">
+    <form action="#" th:action="@{/feed}" method="get">
+        <h3 th:class="feed-header">Sorry an error occurred please return to the main page</h3>
+        <p>
+            <input type="submit" value="Return to feed"/>
+        </p>
+    </form>
+</div>
 </body>
 </html>
