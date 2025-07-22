@@ -7,7 +7,6 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.User
-import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.UserDetailsManager
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository
@@ -34,7 +33,7 @@ class UserAccountsServiceImpl(
 
 
     override fun findUserAccountByUsername(username: String): UserDto {
-        val userEntity = userAccountsRepository.findByUsername(username) ?: throw UsernameNotFoundException("User not found with username: $username")
+        val userEntity = userAccountsRepository.findByUsername(username) ?: throw RuntimeException("User not found with username: $username")
         return userEntity.toUserDto()
     }
 
