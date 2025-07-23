@@ -21,7 +21,7 @@ class UserController(
     @GetMapping("/signup")
     fun signUp(model: Model): String {
         model.addAttribute("user", UserDto())
-        return "sign_up"
+        return "sign-up"
     }
 
 
@@ -29,8 +29,7 @@ class UserController(
     fun createUser(@ModelAttribute userDto: UserDto, request: HttpServletRequest): String {
         return try {
             userAccountsService.createUser(userDto, request)
-            // todo return profile page
-            "redirect:/feed"
+            "redirect:users/my-profile"
 
         } catch (ex: Exception) {
             log.error(ex.message, ex)
@@ -40,9 +39,30 @@ class UserController(
 
 
     @GetMapping("/find-people")
-    fun findPeople(model: Model, authentication: Authentication,  @PageableDefault(size = 10) pageable: Pageable): String {
+    fun findPeople(
+        model: Model,
+        authentication: Authentication,
+        @PageableDefault(size = 10) pageable: Pageable
+    ): String {
         val users = userAccountsService.findPeople(authentication, pageable)
         model.addAttribute("page", users)
-        return "users/findPeople"
+        return "users/find-people"
+    }
+
+
+    @GetMapping("/my-profile")
+    fun myProfile(model: Model, authentication: Authentication): String {
+        val user = userAccountsService.findUserAccountByUsername(authentication.name)
+        model.addAttribute("user", user)
+        return "users/my-profile"
+    }
+
+    @PostMapping("/save-user-profile")
+    fun saveUser(model: Model, authentication: Authentication, @ModelAttribute userDto: UserDto): String {
+        val user = userAccountsService.save(authentication, userDto)
+
+        model.addAttribute("user", user)
+        model.addAttribute("saved", true)
+        return "users/my-profile"
     }
 }

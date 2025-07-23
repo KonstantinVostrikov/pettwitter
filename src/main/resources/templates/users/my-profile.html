@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitter</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+
+<div th:replace="~{header}"></div>
+
+
+<form class="signup-container" action="#" th:action="@{/users/save-user-profile}" th:object="${user}" method="post">
+    <div th:if="${saved}">
+        <h2>Profile Saved</h2>
+        <br>
+    </div>
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" th:value="${user.username}" readonly/>
+<!--        <p id="username"  th:text="${user.username}"></p>-->
+    </div>
+    <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" th:value="${user.name}" required/>
+    </div>
+    <button th:class="signup-button" type="submit">Save</button>
+</form>
+
+</body>
+</html>

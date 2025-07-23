@@ -23,6 +23,7 @@ interface UserAccountsService {
     fun findUserAccountByUsername(username: String): UserDto
     fun createUser(userDto: UserDto, request: HttpServletRequest)
     fun findPeople(authentication: Authentication, pageable: Pageable): Page<UserDto>
+    fun save(authentication: Authentication, userDto: UserDto?): UserDto
 }
 
 @Service
@@ -55,6 +56,16 @@ class UserAccountsServiceImpl(
 
     override fun findPeople(authentication: Authentication, pageable: Pageable): Page<UserDto> {
         return userAccountsRepository.findByUsernameNotOrderByName(pageable, authentication.name).map { it.toUserDto() }
+    }
+
+    override fun save(authentication: Authentication, userDto: UserDto?): UserDto {
+        log.debug { "Changing user: $userDto by ${authentication.name}" }
+        require(!userDto?.username.isNullOrBlank()) { "Username is required" }
+        require(authentication.name == userDto!!.username) { "Users can change only self profile" }
+
+        val userEntity = userAccountsRepository.findByUsername(userDto.username!!)
+        val user = userAccountsRepository.save(userDto.toUserEntity(userEntity!!.id))
+        return user.toUserDto()
     }
 
     private fun authenticateNewlyCreatedUser(userDto: UserDto, user: User, request: HttpServletRequest) {

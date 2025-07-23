@@ -15,3 +15,9 @@ fun UserDto.toUserEntity() = UserEntity(
     username = username ?: throw RuntimeException("username is missing"),
     name = name ?: throw RuntimeException("username is missing"),
 )
+
+fun UserDto.toUserEntity(id: String) = UserEntity(
+    id = id,
+    username = username ?: throw RuntimeException("username is missing"),
+    name = name ?: throw RuntimeException("username is missing"),
+)
