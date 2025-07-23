@@ -50,6 +50,10 @@ nav {
     flex-direction: row-reverse;
 }
 
+.navigation div{
+    padding-left: 1rem;
+}
+
 /* || FEED PAGE*/
 
 .feed {

@@ -2,6 +2,7 @@ package vostrikov.pet.twitter.controllers
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.http.HttpServletRequest
+import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
@@ -33,5 +34,13 @@ class UserController(
             log.error(ex.message, ex)
             "redirect:/feed"
         }
+    }
+
+
+    @GetMapping("/find-people")
+    fun findPeople(model: Model, authentication: Authentication): String {
+        val users = userAccountsService.findAll(authentication)
+        model.addAttribute("users", users)
+        return "users/findPeople"
     }
 }

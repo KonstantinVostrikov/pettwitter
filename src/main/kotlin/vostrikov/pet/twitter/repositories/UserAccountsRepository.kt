@@ -8,4 +8,5 @@ import vostrikov.pet.twitter.model.entities.UserEntity
 @Repository
 interface UserAccountsRepository : CrudRepository<UserEntity, String> {
     fun findByUsername(username: String): UserEntity?
+    fun findByOrderByName(): Iterable<UserEntity>
 }

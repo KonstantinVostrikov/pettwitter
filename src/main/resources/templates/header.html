@@ -8,9 +8,15 @@
 <body>
 
 <header>
-    <nav>
+    <nav class="navigation">
         <div sec:authorize="isAuthenticated()">
-            <a  th:href="@{/logout}">Log Out</a>
+            <a th:href="@{/logout}">Log Out</a>
+        </div>
+        <div>
+            <a th:href="@{/users/find-people}">Find People</a>
+        </div>
+        <div>
+            <a th:href="@{/feed}">Home</a>
         </div>
     </nav>
 

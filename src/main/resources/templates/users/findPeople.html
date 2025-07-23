@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitter</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+
+<div th:replace="~{header}"></div>
+<div th:class="feed">
+    <div th:class="post-container" th:each="item: ${users}">
+
+        <div th:class="post-header">
+            <img
+                    src="https://cdn.freecodecamp.org/curriculum/legacy-css-flexbox/quincy-twitter-photo.jpg"
+                    alt="Quincy Larson's profile picture"
+                    class="profile-thumbnail"
+            />
+            <div class="profile-name">
+                <h3 th:class="zero-margin" th:text="${item.name}">Quincy Larson</h3>
+                <h4 th:class="zero-margin" th:text="${#strings.prepend(item.username,'@')}">@ossia</h4>
+            </div>
+            <div th:class="right-side-btn">
+                <button th:class="right-side-button">Follow</button>
+            </div>
+        </div>
+
+<!--        <div>-->
+<!--            <p>-->
+<!--                Name: <span th:text="${item.name}"></span>-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                Username: <span th:text="${#strings.prepend(item.username,'@')}"></span>-->
+<!--            </p>-->
+<!--        </div>-->
+
+
+    </div>
+</div>
+
+</body>
+</html>

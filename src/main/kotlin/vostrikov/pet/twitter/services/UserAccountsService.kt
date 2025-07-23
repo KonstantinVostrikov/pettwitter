@@ -20,6 +20,7 @@ import vostrikov.pet.twitter.repositories.UserAccountsRepository
 interface UserAccountsService {
     fun findUserAccountByUsername(username: String): UserDto
     fun createUser(userDto: UserDto, request: HttpServletRequest)
+    fun findAll(authentication: Authentication): List<UserDto>
 }
 
 @Service
@@ -33,7 +34,8 @@ class UserAccountsServiceImpl(
 
 
     override fun findUserAccountByUsername(username: String): UserDto {
-        val userEntity = userAccountsRepository.findByUsername(username) ?: throw RuntimeException("User not found with username: $username")
+        val userEntity = userAccountsRepository.findByUsername(username)
+            ?: throw RuntimeException("User not found with username: $username")
         return userEntity.toUserDto()
     }
 
@@ -41,11 +43,16 @@ class UserAccountsServiceImpl(
         log.debug { "Creating new user: $userDto" }
         require(!userDto.username.isNullOrBlank() || !userDto.password.isNullOrBlank()) { "Need to feel username or password" }
         require(!userDto.name.isNullOrBlank()) { "Need to feel user name" }
-        val user = User(userDto.username, passwordEncoder.encode(userDto.password), AuthorityUtils.createAuthorityList("read"))
+        val user =
+            User(userDto.username, passwordEncoder.encode(userDto.password), AuthorityUtils.createAuthorityList("read"))
         userDetailsManager.createUser(user)
         userAccountsRepository.save(userDto.toUserEntity())
         // authenticate newly created user
         authenticateNewlyCreatedUser(userDto, user, request)
+    }
+
+    override fun findAll(authentication: Authentication): List<UserDto> {
+        return userAccountsRepository.findByOrderByName().map { it.toUserDto() }.filterNot { it.username == authentication.name }
     }
 
     private fun authenticateNewlyCreatedUser(userDto: UserDto, user: User, request: HttpServletRequest) {
@@ -53,7 +60,10 @@ class UserAccountsServiceImpl(
         val context = SecurityContextHolder.getContext()
         context.setAuthentication(auth)
         //this step is important, otherwise the new login is not in session which is required by Spring Security
-        request.session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext())
+        request.session.setAttribute(
+            HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
+            SecurityContextHolder.getContext()
+        )
     }
 }
 
