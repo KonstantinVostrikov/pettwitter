@@ -84,6 +84,17 @@ VALUES ('fc326668-c01f-4fd5-b7e0-b0be21a89b86',
         '2025-05-28 02:06:24.806827'),
        ('f3da1c9b-35d8-47f6-881e-aa368f338484', 'fourth post', '8e238d63-ac33-4763-9cbf-86370fb7a8e2', NOW(), NOW());
 
+
+-- More posts for pagination
+INSERT INTO posts
+SELECT
+    gen_random_uuid(),
+    concat('Event ', gs::text),
+    '8e238d63-ac33-4763-9cbf-86370fb7a8e2',
+    NOW() - (gs || ' days')::interval,
+    NOW() - (gs || ' days')::interval
+FROM generate_series(0, 13) AS gs;
+
 -- LIKES
 DROP TABLE IF EXISTS posts_likes_counter;
 CREATE TABLE posts_likes_counter

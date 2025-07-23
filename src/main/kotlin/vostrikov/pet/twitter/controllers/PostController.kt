@@ -1,5 +1,7 @@
 package vostrikov.pet.twitter.controllers
 
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -21,9 +23,9 @@ class PostController(
     }
 
     @GetMapping("/feed")
-    fun posts(model: Model): String {
-        val posts = postService.getPosts()
-        model.addAttribute("posts", posts)
+    fun posts(model: Model,  @PageableDefault(size = 5) pageable: Pageable): String {
+        val posts = postService.getPosts(pageable)
+        model.addAttribute("page", posts)
         model.addAttribute("post", PostDto())
         return "feed"
     }

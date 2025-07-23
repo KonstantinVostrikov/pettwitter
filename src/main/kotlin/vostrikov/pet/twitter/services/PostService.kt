@@ -1,6 +1,9 @@
 package vostrikov.pet.twitter.services
 
 import org.springframework.data.crossstore.ChangeSetPersister
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
@@ -13,7 +16,7 @@ import vostrikov.pet.twitter.repositories.UserAccountsRepository
 
 interface PostService {
     fun createPost(post: PostDto): Boolean
-    fun getPosts(): List<PostDto>
+    fun getPosts(pageable: Pageable): Page<PostDto>
     fun like(postId: String?, username: String?)
 }
 
@@ -29,8 +32,8 @@ class PostServiceImpl(
         return true
     }
 
-    override fun getPosts(): List<PostDto> {
-        return postRepository.findAByOrderByUpdatedAtDesc().map { it.toDto() }
+    override fun getPosts(pageable: Pageable): Page<PostDto> {
+        return postRepository.findAByOrderByUpdatedAtDesc(pageable).map { it.toDto() }
     }
 
     override fun like(postId: String?, username: String?) {

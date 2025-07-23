@@ -117,7 +117,41 @@ nav {
 .post-footer-cta {
     margin: 0 0 0 auto;
     display: flex;
+    flex-wrap: wrap;
 }
+
+.pagination-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px;
+}
+
+.pagination-div a,
+.pagination-div .selected {
+    padding: 8px 12px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    background-color: white;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.pagination-div a:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination-div .selected {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border-color: #007bff;
+    cursor: default;
+}
+
 
 /* || ERROR PAGE*/
 
@@ -172,3 +206,4 @@ nav {
     border-radius: 5px;
     cursor: pointer;
 }
+
