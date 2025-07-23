@@ -2,6 +2,8 @@ package vostrikov.pet.twitter.controllers
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.http.HttpServletRequest
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -38,9 +40,9 @@ class UserController(
 
 
     @GetMapping("/find-people")
-    fun findPeople(model: Model, authentication: Authentication): String {
-        val users = userAccountsService.findAll(authentication)
-        model.addAttribute("users", users)
+    fun findPeople(model: Model, authentication: Authentication,  @PageableDefault(size = 10) pageable: Pageable): String {
+        val users = userAccountsService.findPeople(authentication, pageable)
+        model.addAttribute("page", users)
         return "users/findPeople"
     }
 }

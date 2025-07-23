@@ -2,6 +2,8 @@ package vostrikov.pet.twitter.services
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.http.HttpServletRequest
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.authority.AuthorityUtils
@@ -20,7 +22,7 @@ import vostrikov.pet.twitter.repositories.UserAccountsRepository
 interface UserAccountsService {
     fun findUserAccountByUsername(username: String): UserDto
     fun createUser(userDto: UserDto, request: HttpServletRequest)
-    fun findAll(authentication: Authentication): List<UserDto>
+    fun findPeople(authentication: Authentication, pageable: Pageable): Page<UserDto>
 }
 
 @Service
@@ -51,8 +53,8 @@ class UserAccountsServiceImpl(
         authenticateNewlyCreatedUser(userDto, user, request)
     }
 
-    override fun findAll(authentication: Authentication): List<UserDto> {
-        return userAccountsRepository.findByOrderByName().map { it.toUserDto() }.filterNot { it.username == authentication.name }
+    override fun findPeople(authentication: Authentication, pageable: Pageable): Page<UserDto> {
+        return userAccountsRepository.findByUsernameNotOrderByName(pageable, authentication.name).map { it.toUserDto() }
     }
 
     private fun authenticateNewlyCreatedUser(userDto: UserDto, user: User, request: HttpServletRequest) {
