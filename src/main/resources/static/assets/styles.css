@@ -88,12 +88,6 @@ nav {
     flex-direction: row;
 }
 
-.profile-thumbnail {
-    width: 50px;
-    height: 50px;
-    border-radius: 4px;
-}
-
 .profile-name {
     display: flex;
     flex-direction: column;
@@ -211,3 +205,53 @@ nav {
     cursor: pointer;
 }
 
+/*PROFILE PAGE*/
+.profile-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 450px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-form-group {
+    margin-bottom: 1rem;
+    width: 45%;
+}
+
+.profile-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.profile-form-group input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.profile-photo-container {
+    display: flex;
+
+}
+
+.profile-thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+}
+
+.profile-safe-button{
+    width: 100%;
+    margin-top: 0.7rem;
+    padding: 0.7rem;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

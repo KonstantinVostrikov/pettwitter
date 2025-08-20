@@ -2,6 +2,7 @@ package vostrikov.pet.twitter.model.entities
 
 import jakarta.persistence.*
 import vostrikov.pet.twitter.model.dto.PostDto
+import vostrikov.pet.twitter.uploadDir
 import java.time.LocalDateTime
 
 
@@ -39,6 +40,7 @@ fun PostEntity.toDto() = PostDto(
     content = this.content,
     authorNickname = this.author.username,
     authorFullName = this.author.name,
+    authorPhoto = if (!this.author.photo.isNullOrBlank()) "$uploadDir${author.username}/${author.photo}" else "/assets/images/user.png",
     updatedAt = this.updatedAt,
     likesCounter = this.likesCounter.size
 )

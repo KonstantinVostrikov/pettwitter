@@ -28,7 +28,7 @@
     <div th:class="post-container" th:each="item: ${page}">
         <div th:class="post-header">
             <img
-                    src="https://cdn.freecodecamp.org/curriculum/legacy-css-flexbox/quincy-twitter-photo.jpg"
+                    th:src="@{${item.authorPhoto}}"
                     alt="Quincy Larson's profile picture"
                     class="profile-thumbnail"
             />

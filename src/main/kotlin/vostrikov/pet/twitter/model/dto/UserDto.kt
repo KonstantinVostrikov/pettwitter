@@ -8,16 +8,19 @@ data class UserDto(
     val username: String? = null,
     val name: String? = null,
     val password: String? = null,
+    var photo: String? = null,
 )
 
 fun UserDto.toUserEntity() = UserEntity(
     id = id,
     username = username ?: throw RuntimeException("username is missing"),
     name = name ?: throw RuntimeException("username is missing"),
+
 )
 
 fun UserDto.toUserEntity(id: String) = UserEntity(
     id = id,
     username = username ?: throw RuntimeException("username is missing"),
     name = name ?: throw RuntimeException("username is missing"),
+    photo = photo
 )

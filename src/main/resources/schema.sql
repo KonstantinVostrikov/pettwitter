@@ -44,14 +44,15 @@ DROP TABLE IF EXISTS user_accounts CASCADE;
 CREATE TABLE IF NOT EXISTS user_accounts
 (
     id       VARCHAR(36) PRIMARY KEY,
-    username varchar(50) NOT NULL REFERENCES users (username) ON DELETE CASCADE,
-    name     VARCHAR(40) NOT NULL
+    username VARCHAR(50) NOT NULL REFERENCES users (username) ON DELETE CASCADE,
+    name     VARCHAR(40) NOT NULL,
+    photo    VARCHAR(255)
 );
 INSERT INTO user_accounts
 VALUES ('8e238d63-ac33-4763-9cbf-86370fb7a8e2', 'alice', 'aliceName'),
-       ('2b32c85b-adee-4bbd-b9f8-3f09c4348087', 'bob','bob'),
+       ('2b32c85b-adee-4bbd-b9f8-3f09c4348087', 'bob', 'bob'),
        ('1f9b3a67-4cce-411a-8e8d-9f6c1f7e3f17', 'charlie', 'charlie'),
-       ('3c4377df-d5e5-456f-9444-32e5d1524ac9','diana', 'diana'),
+       ('3c4377df-d5e5-456f-9444-32e5d1524ac9', 'diana', 'diana'),
        ('74c5d6e2-dcbe-4b98-b4f4-122b9d118f90', 'ethan', 'ethan'),
        ('de6b6a3f-d103-4658-bf83-84f2cbdcbb38', 'fiona', 'fiona'),
        ('95c7187d-1e6e-4c30-b991-7355b8c44b66', 'george', 'george'),
@@ -87,12 +88,11 @@ VALUES ('fc326668-c01f-4fd5-b7e0-b0be21a89b86',
 
 -- More posts for pagination
 INSERT INTO posts
-SELECT
-    gen_random_uuid(),
-    concat('Event ', gs::text),
-    '8e238d63-ac33-4763-9cbf-86370fb7a8e2',
-    NOW() - (gs || ' days')::interval,
-    NOW() - (gs || ' days')::interval
+SELECT gen_random_uuid(),
+       concat('Event ', gs::text),
+       '8e238d63-ac33-4763-9cbf-86370fb7a8e2',
+       NOW() - (gs || ' days')::interval,
+       NOW() - (gs || ' days')::interval
 FROM generate_series(0, 13) AS gs;
 
 -- LIKES

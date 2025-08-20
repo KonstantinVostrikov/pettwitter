@@ -10,8 +10,9 @@ data class PostDto(
     var content: String? = null,
     var authorNickname: String? = null,
     var authorFullName: String? = null,
+    var authorPhoto: String? = null,
     var updatedAt: LocalDateTime? = null,
-    var likesCounter: Int = 0
+    var likesCounter: Int = 0,
 )
 
 fun PostDto.toPostEntity() = PostEntity(
