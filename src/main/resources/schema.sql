@@ -16,9 +16,6 @@ CREATE TABLE IF NOT EXISTS authorities
 CREATE UNIQUE INDEX IF NOT EXISTS ix_auth_username ON authorities (username, authority);
 
 
-
-
-
 -- USER ACCOUNTS
 DROP TABLE IF EXISTS user_accounts CASCADE;
 CREATE TABLE IF NOT EXISTS user_accounts
@@ -28,7 +25,6 @@ CREATE TABLE IF NOT EXISTS user_accounts
     name     VARCHAR(40) NOT NULL,
     photo    VARCHAR(255)
 );
-
 
 
 -- POSTS
@@ -43,7 +39,6 @@ CREATE TABLE IF NOT EXISTS posts
 );
 
 
-
 -- LIKES
 DROP TABLE IF EXISTS posts_likes_counter;
 CREATE TABLE posts_likes_counter
@@ -51,4 +46,16 @@ CREATE TABLE posts_likes_counter
     post_id VARCHAR(36) REFERENCES posts (id) ON UPDATE CASCADE,
     user_id VARCHAR(36) REFERENCES user_accounts (id) ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT likes_product_pkey PRIMARY KEY (post_id, user_id) -- explicit pk
+);
+
+
+-- IMAGES
+DROP TABLE IF EXISTS image;
+CREATE TABLE IF NOT EXISTS image
+(
+    id        VARCHAR(36) PRIMARY KEY,
+    name      VARCHAR(120),
+    type      VARCHAR(120),
+    file_size bigint NOT NULL,
+    file_data bytea NOT NULL
 );

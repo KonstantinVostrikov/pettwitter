@@ -5,7 +5,6 @@ import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import vostrikov.pet.twitter.model.dto.UserDto
-import vostrikov.pet.twitter.uploadDir
 
 @Entity
 @Table(name = "user_accounts")
@@ -31,5 +30,5 @@ fun UserEntity.toUserDto() = UserDto(
     id = id,
     username = username,
     name = name,
-    photo = if (!photo.isNullOrBlank()) "$uploadDir$username/$photo" else "assets/images/user.png"
+    photo = if (!photo.isNullOrBlank()) photo else "assets/images/user.png"
 )

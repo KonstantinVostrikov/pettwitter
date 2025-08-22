@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.UserDetailsManager
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
 import vostrikov.pet.twitter.model.dto.UserDto
 import vostrikov.pet.twitter.model.dto.toUserEntity
 import vostrikov.pet.twitter.model.entities.toUserDto
@@ -24,6 +25,7 @@ interface UserAccountsService {
     fun createUser(userDto: UserDto, request: HttpServletRequest)
     fun findPeople(authentication: Authentication, pageable: Pageable): Page<UserDto>
     fun save(authentication: Authentication, userDto: UserDto?): UserDto
+    fun savePhoto(userDto: UserDto, multipartFile: MultipartFile)
 }
 
 @Service
@@ -31,6 +33,7 @@ class UserAccountsServiceImpl(
     private val userAccountsRepository: UserAccountsRepository,
     private val userDetailsManager: UserDetailsManager,
     private val passwordEncoder: PasswordEncoder,
+    private val fileUploadServiceImpl: FileUploadServiceImpl,
 ) : UserAccountsService {
 
     private val log = KotlinLogging.logger {}
@@ -66,6 +69,10 @@ class UserAccountsServiceImpl(
         val userEntity = userAccountsRepository.findByUsername(userDto.username!!)
         val user = userAccountsRepository.save(userDto.toUserEntity(userEntity!!.id))
         return user.toUserDto()
+    }
+
+    override fun savePhoto(userDto: UserDto, multipartFile: MultipartFile) {
+        userDto.photo = "images/" + fileUploadServiceImpl.uploadFileToDb(multipartFile)
     }
 
     private fun authenticateNewlyCreatedUser(userDto: UserDto, user: User, request: HttpServletRequest) {

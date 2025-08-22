@@ -7,20 +7,16 @@ import org.springframework.data.web.PageableDefault
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.util.StringUtils
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import vostrikov.pet.twitter.model.dto.UserDto
-import vostrikov.pet.twitter.services.FileUploadServiceImpl
 import vostrikov.pet.twitter.services.UserAccountsService
-import vostrikov.pet.twitter.uploadDir
 
 
 @Controller
 @RequestMapping("/users")
 class UserController(
     private val userAccountsService: UserAccountsService,
-    private val fileUploadServiceImpl: FileUploadServiceImpl
 ) {
     private val log = KotlinLogging.logger {}
 
@@ -72,11 +68,7 @@ class UserController(
         @RequestParam("image") multipartFile: MultipartFile?
     ): String {
         if (multipartFile != null && !multipartFile.isEmpty) {
-            val fileName = StringUtils.cleanPath(multipartFile.originalFilename.orEmpty())
-            log.debug("File name is {}", fileName)
-            userDto.photo = fileName
-            val uploadDir = uploadDir + userDto.username;
-            fileUploadServiceImpl.uploadFile(uploadDir, fileName, multipartFile)
+            userAccountsService.savePhoto(userDto, multipartFile)
         }
         val user = userAccountsService.save(authentication, userDto)
         model.addAttribute("user", user)
