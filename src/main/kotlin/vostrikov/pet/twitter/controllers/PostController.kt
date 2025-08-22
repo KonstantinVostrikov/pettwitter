@@ -41,6 +41,7 @@ class PostController(
     @GetMapping("/post/like/{id}")
     fun likePost(@PathVariable id: String, authentication: Authentication): String {
         postService.like(id, authentication.name)
+        // todo: redirect to current user page, not to main
         return "redirect:/feed"
     }
 
