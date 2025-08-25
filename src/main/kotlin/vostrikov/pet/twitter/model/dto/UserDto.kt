@@ -9,7 +9,11 @@ data class UserDto(
     val name: String? = null,
     val password: String? = null,
     var photo: String? = null,
-)
+) {
+    override fun toString(): String {
+        return "UserDto(id='$id', username=$username, name=$name, photo=$photo)"
+    }
+}
 
 fun UserDto.toUserEntity() = UserEntity(
     id = id,

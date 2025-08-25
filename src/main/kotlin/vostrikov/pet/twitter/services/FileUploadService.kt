@@ -1,6 +1,6 @@
 package vostrikov.pet.twitter.services
 
-import io.github.oshai.kotlinlogging.KotlinLogging
+import org.slf4j.LoggerFactory
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
@@ -22,8 +22,8 @@ interface FileUploadService {
 class FileUploadServiceImpl(
     private val imageRepository: ImageRepository,
 ) : FileUploadService {
-    private val log = KotlinLogging.logger {}
 
+    private val log = LoggerFactory.getLogger(javaClass)
 
     override fun uploadFile(uploadDir: String, filename: String, multipartFile: MultipartFile) {
         val path = Paths.get(uploadDir)
@@ -35,7 +35,7 @@ class FileUploadServiceImpl(
         try {
             val inputStream = multipartFile.inputStream
             val filePath = path.resolve(filename)
-            log.debug { "saving into $filePath" }
+            log.debug("saving into {}", filePath)
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING)
         } catch (e: Exception) {
             log.error("Error while creating file", e)

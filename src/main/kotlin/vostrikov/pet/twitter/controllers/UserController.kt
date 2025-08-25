@@ -1,7 +1,7 @@
 package vostrikov.pet.twitter.controllers
 
-import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.http.HttpServletRequest
+import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.security.core.Authentication
@@ -18,7 +18,7 @@ import vostrikov.pet.twitter.services.UserAccountsService
 class UserController(
     private val userAccountsService: UserAccountsService,
 ) {
-    private val log = KotlinLogging.logger {}
+    private val log = LoggerFactory.getLogger(javaClass)
 
     @GetMapping("/signup")
     fun signUp(model: Model): String {
@@ -31,7 +31,7 @@ class UserController(
     fun createUser(@ModelAttribute userDto: UserDto, request: HttpServletRequest): String {
         return try {
             userAccountsService.createUser(userDto, request)
-            "redirect:users/my-profile"
+            "redirect:/users/my-profile"
 
         } catch (ex: Exception) {
             log.error(ex.message, ex)

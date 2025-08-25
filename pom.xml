@@ -90,9 +90,10 @@
 
         <!--LOGGING-->
         <dependency>
-            <groupId>io.github.oshai</groupId>
-            <artifactId>kotlin-logging-jvm</artifactId>
-            <version>7.0.3</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.18</version>
+            <scope>compile</scope>
         </dependency>
 
         <!--TEST-->

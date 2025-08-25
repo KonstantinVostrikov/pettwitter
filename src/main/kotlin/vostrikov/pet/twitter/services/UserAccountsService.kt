@@ -1,7 +1,7 @@
 package vostrikov.pet.twitter.services
 
-import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.http.HttpServletRequest
+import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -36,7 +36,7 @@ class UserAccountsServiceImpl(
     private val fileUploadServiceImpl: FileUploadServiceImpl,
 ) : UserAccountsService {
 
-    private val log = KotlinLogging.logger {}
+    private val log = LoggerFactory.getLogger(javaClass)
 
 
     override fun findUserAccountByUsername(username: String): UserDto {
@@ -46,8 +46,9 @@ class UserAccountsServiceImpl(
     }
 
     override fun createUser(userDto: UserDto, request: HttpServletRequest) {
-        log.debug { "Creating new user: $userDto" }
-        require(!userDto.username.isNullOrBlank() || !userDto.password.isNullOrBlank()) { "Need to feel username or password" }
+        log.debug("Creating new user:{}", userDto.toString())
+        require(!userDto.username.isNullOrBlank() ) { "Need to feel username" }
+        require(!userDto.password.isNullOrBlank() ) { "Need to feel password" }
         require(!userDto.name.isNullOrBlank()) { "Need to feel user name" }
         val user =
             User(userDto.username, passwordEncoder.encode(userDto.password), AuthorityUtils.createAuthorityList("read"))
@@ -62,7 +63,7 @@ class UserAccountsServiceImpl(
     }
 
     override fun save(authentication: Authentication, userDto: UserDto?): UserDto {
-        log.debug { "Changing user: $userDto by ${authentication.name}" }
+        log.debug("Changing user: {} by {}", userDto, authentication.name)
         require(!userDto?.username.isNullOrBlank()) { "Username is required" }
         require(authentication.name == userDto!!.username) { "Users can change only self profile" }
 
